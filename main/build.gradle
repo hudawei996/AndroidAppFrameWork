@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'  //for greenDao
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.zenglb.framework"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    greendao {
+        schemaVersion 1                  //修改这里的版本号，greenDAO会自动修改生成到DAOMaster中的版本号
+        targetGenDir 'src/main/java'     //表示greenDAO生成的DAOMaster和DaoSession的位置
+        daoPackage  'com.zenglb.framework.database.daomaster' //我觉得最好放在Entity 下面的目录！！！
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    testCompile 'junit:junit:4.12'
+
+    compile project(':commonlib')
+
+
+    compile 'org.greenrobot:greendao:3.2.0'      //greenDao Core
+    compile 'net.zetetic:android-database-sqlcipher:3.5.4'
+
+
+    compile 'jp.wasabeef:recyclerview-animators:2.2.4'
+    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+    compile 'com.liaoinstan.springview:library:1.2.6'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:cardview-v7:25.1.0'
+
+
+
+}
