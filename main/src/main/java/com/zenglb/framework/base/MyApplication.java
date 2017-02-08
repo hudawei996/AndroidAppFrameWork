@@ -3,6 +3,7 @@ package com.zenglb.framework.base;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.zenglb.commonlib.sharedpreferences.SharedPreferencesDao;
 import com.zenglb.framework.database.daomaster.DaoMaster;
 import com.zenglb.commonlib.base.BaseApplication;
 import com.zenglb.framework.database.daomaster.DaoSession;
@@ -24,7 +25,7 @@ public class MyApplication extends BaseApplication {
 		String processName = getProcessName();
 		Log.d(TAG, processName + "Application onCreate");
 		if (!TextUtils.isEmpty(processName) && processName.equals(this.getPackageName())) { //main Process
-//			setDaoSession(SharedPreferencesDao.getInstance().getData("Account","DefDb",String.class));
+			setDaoSession(SharedPreferencesDao.getInstance().getData("Account","DefDb",String.class));
 		}
 	}
 

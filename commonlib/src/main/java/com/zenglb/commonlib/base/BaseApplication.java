@@ -53,6 +53,4 @@ public class BaseApplication extends Application {
 	}
 
 
-
-
 }

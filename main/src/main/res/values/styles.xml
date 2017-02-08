@@ -15,8 +15,6 @@
         <!--Window color-->
         <item name="android:windowBackground">@color/dim_foreground_material_dark</item>
         <item name="android:windowIsTranslucent">true</item>
-
-
     </style>
 
 
@@ -44,18 +42,11 @@
     </style>
 
 
-    <style name="FullscreenTheme" parent="AppTheme">
-
-        <item name="android:windowTranslucentStatus">false</item>
+    <style name="FullscreenTheme" parent="Theme.AppCompat">
+        <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@android:color/transparent</item>
-
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
 
 
@@ -64,9 +55,11 @@
         <item name="colorControlActivated">#FFCC00</item>
     </style>
 
+
     <style name="Theme.ToolBar.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:actionMenuTextColor">@android:color/holo_red_dark</item>
     </style>
+
 
     <style name="FullscreenActionBarStyle" parent="android:Widget.Holo.ActionBar">
         <item name="android:background">@color/black_overlay</item>

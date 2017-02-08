@@ -15,15 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.demo.DemoActivity"></activity>
-
-        <activity
-            android:name=".activity.preLogin.LoginActivity"
-            android:theme="@style/FullscreenTheme"></activity>
-
-        <activity
-            android:name=".activity.preLogin.RegisterActivity"
-            android:theme="@style/Translucent"></activity>
 
         <activity
             android:name=".activity.launch.LaunchActivity"
@@ -33,6 +24,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+        <activity android:name=".activity.demo.DemoActivity">
+
+        </activity>
+
+        <activity
+            android:name=".activity.preLogin.LoginActivity"
+            android:theme="@style/FullscreenTheme"/>
+
+        <activity
+            android:name=".activity.preLogin.RegisterActivity"
+            android:theme="@style/Translucent"/>
+
+
 
     </application>
 

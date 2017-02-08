@@ -15,7 +15,7 @@ import com.zenglb.commonlib.R;
  * 4.
  *
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = BaseActivity.class.getSimpleName();
     private Toolbar mToolbar;
 
@@ -28,8 +28,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
         }
+        initViews();
     }
 
+
+    protected abstract int setLayoutId();
+    protected abstract void initViews();
+    public void onClick(View view){}  //不是必须的
 
 
     /*
@@ -115,13 +120,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    /**
-     * this activity layout res
-     * 设置layout布局,在子类重写该方法.
-     *
-     * @return res layout xml id
-     */
-    protected abstract int setLayoutId();
+
+
 
     @Override
     protected void onStart() {

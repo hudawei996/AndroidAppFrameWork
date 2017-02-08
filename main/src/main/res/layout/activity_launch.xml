@@ -1,15 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_launch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/bg"
-    tools:context="com.zenglb.framework.activity.launch.LaunchActivity">
+    tools:context=".activity.launch.LaunchActivity">
 
     <ImageView
-        android:layout_width="99dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher"/>
-
-</LinearLayout>
+        android:background="@drawable/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

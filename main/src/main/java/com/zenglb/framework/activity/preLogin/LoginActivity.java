@@ -6,40 +6,49 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.zenglb.commonlib.base.BaseActivity;
 import com.zenglb.framework.R;
 import com.zenglb.framework.activity.demo.DemoActivity;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
-public class LoginActivity extends AppCompatActivity {
-    @InjectView(R.id.et_username)
+/**
+ * 1.登录的对话框在弹出键盘的时候希望能够向上移动
+ * 2.内存占用实在是太多太多了，太多太多了！
+ * 3.
+ */
+public class LoginActivity extends BaseActivity {
     EditText etUsername;
-    @InjectView(R.id.et_password)
     EditText etPassword;
-    @InjectView(R.id.bt_go)
     Button btGo;
-    @InjectView(R.id.cv)
     CardView cv;
-    @InjectView(R.id.fab)
     FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.bt_go, R.id.fab})
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    protected void initViews() {
+        etUsername=(EditText) findViewById(R.id.et_username);
+        etPassword=(EditText) findViewById(R.id.et_password);
+        btGo=(Button) findViewById(R.id.bt_go);
+        cv=(CardView) findViewById(R.id.cv);
+        fab=(FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
+        btGo.setOnClickListener(this);
+    }
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
@@ -55,14 +64,14 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             case R.id.bt_go:
                 Explode explode = new Explode();
-                explode.setDuration(500);
+                explode.setDuration(300);
 
                 getWindow().setExitTransition(explode);
                 getWindow().setEnterTransition(explode);
                 ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-                Intent i2 = new Intent(this,DemoActivity.class);
+                Intent i2 = new Intent(this, DemoActivity.class);
                 startActivity(i2, oc2.toBundle());
-
+//                this.finish();
                 break;
         }
     }

@@ -5,32 +5,22 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
-
+import com.zenglb.commonlib.base.BaseActivity;
 import com.zenglb.framework.R;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
-public class RegisterActivity extends AppCompatActivity {
-
-    @InjectView(R.id.fab)
+public class RegisterActivity extends BaseActivity {
     FloatingActionButton fab;
-    @InjectView(R.id.cv_add)
     CardView cvAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        ButterKnife.inject(this);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ShowEnterAnimation();
         }
@@ -40,6 +30,17 @@ public class RegisterActivity extends AppCompatActivity {
                 animateRevealClose();
             }
         });
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_register;
+    }
+
+    @Override
+    protected void initViews() {
+        fab=(FloatingActionButton) findViewById(R.id.fab);
+        cvAdd=(CardView) findViewById(R.id.cv_add);
     }
 
     private void ShowEnterAnimation() {
@@ -78,8 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void animateRevealShow() {
-        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth()/2,0, fab.getWidth() / 2, cvAdd.getHeight());
-        mAnimator.setDuration(500);
+        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth() / 2, 0, fab.getWidth() / 2, cvAdd.getHeight());
+        mAnimator.setDuration(300);
         mAnimator.setInterpolator(new AccelerateInterpolator());
         mAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -97,8 +98,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void animateRevealClose() {
-        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd,cvAdd.getWidth()/2,0, cvAdd.getHeight(), fab.getWidth() / 2);
-        mAnimator.setDuration(500);
+        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth() / 2, 0, cvAdd.getHeight(), fab.getWidth() / 2);
+        mAnimator.setDuration(300);
         mAnimator.setInterpolator(new AccelerateInterpolator());
         mAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -116,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
         mAnimator.start();
     }
+
     @Override
     public void onBackPressed() {
         animateRevealClose();
