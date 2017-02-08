@@ -1,5 +1,6 @@
 package com.zenglb.commonlib.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,7 +8,11 @@ import android.view.View;
 import com.zenglb.commonlib.R;
 
 /**
- * 基类就只做基类的事情
+ * 基类就只做基类的事情,不要把业务层面的代码写到这里来
+ * 1.toolbar 的封装使用
+ * 2.页面之间的跳转
+ * 3.规范代码需要吗？？
+ * 4.
  *
  */
 public abstract class BaseActivity extends AppCompatActivity {
@@ -23,17 +28,49 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
         }
-
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (null != getToolbar() && isShowBacking()) {
-            showBack();
-        }
+
+    /*
+	 * Activity的跳转
+	 */
+    public void setIntentClass(Class<?> cla) {
+        Intent intent = new Intent();
+        intent.setClass(this, cla);
+        startActivity(intent);
+//        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
+
+//    /*
+//     * Activity的跳转-带参数
+//     */
+//    public void setIntentClass(Class<?> cla, Object obj) {
+//        Intent intent = new Intent();
+//        intent.setClass(this, cla);
+//        intent.putExtra(INTENTTAG, (Serializable) obj);
+//        startActivity(intent);
+//        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//    }
+
+
+
+    /**
+     * Activity -> webview Activity的跳转-带参数
+     *
+     * @param
+     * @param title
+     * @param link
+     */
+    public void setIntentWebView(String title, String link) {
+//        Intent intent = new Intent();
+//        intent.setClass(this, WebviewActivity.class);
+//        intent.putExtra(INTENTTAG, title);
+//        intent.putExtra(INTENTTAG2, link);
+//        startActivity(intent);
+//        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+    }
+
 
     /**
      * Get toolbar
@@ -85,6 +122,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return res layout xml id
      */
     protected abstract int setLayoutId();
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (null != getToolbar() && isShowBacking()) {
+            showBack();
+        }
+    }
 
     @Override
     protected void onDestroy() {

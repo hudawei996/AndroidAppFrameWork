@@ -11,7 +11,6 @@ import com.zenglb.framework.database.daomaster.MessagesDao;
 /**
  * 重新的考虑升级策略
  *
- *
  * Created by zenglb on 2017/1/3.
  */
 public class MySQLiteOpenHelper extends DaoMaster.OpenHelper {
