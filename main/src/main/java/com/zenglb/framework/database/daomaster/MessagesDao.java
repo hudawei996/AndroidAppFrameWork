@@ -15,7 +15,7 @@ import com.zenglb.framework.entity.Messages;
 /** 
  * DAO for table "MESSAGES".
 */
-public class MessagesDao extends AbstractDao<Messages, Long> {
+public class MessagesDao extends AbstractDao<Messages, Void> {
 
     public static final String TABLENAME = "MESSAGES";
 
@@ -24,12 +24,16 @@ public class MessagesDao extends AbstractDao<Messages, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Read = new Property(1, boolean.class, "read", false, "READ");
-        public final static Property Created = new Property(2, long.class, "created", false, "CREATED");
+        public final static Property Content = new Property(0, String.class, "content", false, "CONTENT");
+        public final static Property Action_type = new Property(1, String.class, "action_type", false, "ACTION_TYPE");
+        public final static Property Image = new Property(2, String.class, "image", false, "IMAGE");
         public final static Property Title = new Property(3, String.class, "title", false, "TITLE");
-        public final static Property Message = new Property(4, String.class, "message", false, "MESSAGE");
-        public final static Property Classify = new Property(5, String.class, "classify", false, "CLASSIFY");
+        public final static Property Read = new Property(4, boolean.class, "read", false, "READ");
+        public final static Property Message = new Property(5, String.class, "message", false, "MESSAGE");
+        public final static Property Created = new Property(6, String.class, "created", false, "CREATED");
+        public final static Property Id = new Property(7, int.class, "id", false, "ID");
+        public final static Property Classify = new Property(8, String.class, "classify", false, "CLASSIFY");
+        public final static Property Action_id = new Property(9, String.class, "action_id", false, "ACTION_ID");
     }
 
 
@@ -45,17 +49,16 @@ public class MessagesDao extends AbstractDao<Messages, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"MESSAGES\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"READ\" INTEGER NOT NULL ," + // 1: read
-                "\"CREATED\" INTEGER NOT NULL ," + // 2: created
+                "\"CONTENT\" TEXT," + // 0: content
+                "\"ACTION_TYPE\" TEXT," + // 1: action_type
+                "\"IMAGE\" TEXT," + // 2: image
                 "\"TITLE\" TEXT," + // 3: title
-                "\"MESSAGE\" TEXT," + // 4: message
-                "\"CLASSIFY\" TEXT);"); // 5: classify
-        // Add Indexes
-        db.execSQL("CREATE INDEX " + constraint + "IDX_MESSAGES_MESSAGE ON MESSAGES" +
-                " (\"MESSAGE\" ASC);");
-        db.execSQL("CREATE INDEX " + constraint + "IDX_MESSAGES_CLASSIFY ON MESSAGES" +
-                " (\"CLASSIFY\" ASC);");
+                "\"READ\" INTEGER NOT NULL ," + // 4: read
+                "\"MESSAGE\" TEXT," + // 5: message
+                "\"CREATED\" TEXT," + // 6: created
+                "\"ID\" INTEGER NOT NULL ," + // 7: id
+                "\"CLASSIFY\" TEXT," + // 8: classify
+                "\"ACTION_ID\" TEXT);"); // 9: action_id
     }
 
     /** Drops the underlying database table. */
@@ -68,26 +71,46 @@ public class MessagesDao extends AbstractDao<Messages, Long> {
     protected final void bindValues(DatabaseStatement stmt, Messages entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        String content = entity.getContent();
+        if (content != null) {
+            stmt.bindString(1, content);
         }
-        stmt.bindLong(2, entity.getRead() ? 1L: 0L);
-        stmt.bindLong(3, entity.getCreated());
+ 
+        String action_type = entity.getAction_type();
+        if (action_type != null) {
+            stmt.bindString(2, action_type);
+        }
+ 
+        String image = entity.getImage();
+        if (image != null) {
+            stmt.bindString(3, image);
+        }
  
         String title = entity.getTitle();
         if (title != null) {
             stmt.bindString(4, title);
         }
+        stmt.bindLong(5, entity.getRead() ? 1L: 0L);
  
         String message = entity.getMessage();
         if (message != null) {
-            stmt.bindString(5, message);
+            stmt.bindString(6, message);
         }
+ 
+        String created = entity.getCreated();
+        if (created != null) {
+            stmt.bindString(7, created);
+        }
+        stmt.bindLong(8, entity.getId());
  
         String classify = entity.getClassify();
         if (classify != null) {
-            stmt.bindString(6, classify);
+            stmt.bindString(9, classify);
+        }
+ 
+        String action_id = entity.getAction_id();
+        if (action_id != null) {
+            stmt.bindString(10, action_id);
         }
     }
 
@@ -95,75 +118,100 @@ public class MessagesDao extends AbstractDao<Messages, Long> {
     protected final void bindValues(SQLiteStatement stmt, Messages entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        String content = entity.getContent();
+        if (content != null) {
+            stmt.bindString(1, content);
         }
-        stmt.bindLong(2, entity.getRead() ? 1L: 0L);
-        stmt.bindLong(3, entity.getCreated());
+ 
+        String action_type = entity.getAction_type();
+        if (action_type != null) {
+            stmt.bindString(2, action_type);
+        }
+ 
+        String image = entity.getImage();
+        if (image != null) {
+            stmt.bindString(3, image);
+        }
  
         String title = entity.getTitle();
         if (title != null) {
             stmt.bindString(4, title);
         }
+        stmt.bindLong(5, entity.getRead() ? 1L: 0L);
  
         String message = entity.getMessage();
         if (message != null) {
-            stmt.bindString(5, message);
+            stmt.bindString(6, message);
         }
+ 
+        String created = entity.getCreated();
+        if (created != null) {
+            stmt.bindString(7, created);
+        }
+        stmt.bindLong(8, entity.getId());
  
         String classify = entity.getClassify();
         if (classify != null) {
-            stmt.bindString(6, classify);
+            stmt.bindString(9, classify);
+        }
+ 
+        String action_id = entity.getAction_id();
+        if (action_id != null) {
+            stmt.bindString(10, action_id);
         }
     }
 
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public Void readKey(Cursor cursor, int offset) {
+        return null;
     }    
 
     @Override
     public Messages readEntity(Cursor cursor, int offset) {
         Messages entity = new Messages( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getShort(offset + 1) != 0, // read
-            cursor.getLong(offset + 2), // created
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // content
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // action_type
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // image
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // title
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // message
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // classify
+            cursor.getShort(offset + 4) != 0, // read
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // message
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // created
+            cursor.getInt(offset + 7), // id
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // classify
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // action_id
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, Messages entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setRead(cursor.getShort(offset + 1) != 0);
-        entity.setCreated(cursor.getLong(offset + 2));
+        entity.setContent(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setAction_type(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setImage(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setMessage(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setClassify(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setRead(cursor.getShort(offset + 4) != 0);
+        entity.setMessage(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setCreated(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setId(cursor.getInt(offset + 7));
+        entity.setClassify(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setAction_id(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
      }
     
     @Override
-    protected final Long updateKeyAfterInsert(Messages entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected final Void updateKeyAfterInsert(Messages entity, long rowId) {
+        // Unsupported or missing PK type
+        return null;
     }
     
     @Override
-    public Long getKey(Messages entity) {
-        if(entity != null) {
-            return entity.getId();
-        } else {
-            return null;
-        }
+    public Void getKey(Messages entity) {
+        return null;
     }
 
     @Override
     public boolean hasKey(Messages entity) {
-        return entity.getId() != null;
+        // TODO
+        return false;
     }
 
     @Override

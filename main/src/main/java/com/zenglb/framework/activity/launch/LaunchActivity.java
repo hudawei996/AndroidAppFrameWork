@@ -11,9 +11,10 @@ import com.zenglb.commonlib.sharedpreferences.SharedPreferencesDao;
 import com.zenglb.framework.R;
 import com.zenglb.framework.activity.demo.DemoActivity;
 import com.zenglb.framework.activity.preLogin.LoginActivity;
+import com.zenglb.framework.config.SPKey;
 
 /**
- * 启动页面应该都一样
+ * 启动页面的背景图放在不同的目录还会导致内存的占用大小不一样啊
  */
 public class LaunchActivity extends BaseActivity {
 
@@ -21,7 +22,7 @@ public class LaunchActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    String accessToken = SharedPreferencesDao.getInstance().getData("222", "", String.class);
+                    String accessToken = SharedPreferencesDao.getInstance().getData(SPKey.KEY_ACCESS_TOKEN, "", String.class);
 
                     if (TextUtils.isEmpty(accessToken)) {
                         Intent i1 = new Intent();
@@ -48,9 +49,11 @@ public class LaunchActivity extends BaseActivity {
     protected int setLayoutId() {
         return R.layout.activity_launch;
     }
+
     @Override
     protected void initViews() {
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

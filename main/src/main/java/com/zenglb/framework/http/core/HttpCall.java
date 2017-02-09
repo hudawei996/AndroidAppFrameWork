@@ -1,8 +1,20 @@
 package com.zenglb.framework.http.core;
 
+import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
+
+import com.zenglb.commonlib.sharedpreferences.SharedPreferencesDao;
+import com.zenglb.framework.config.SPKey;
+import com.zenglb.framework.entity.Messages;
+import com.zenglb.framework.http.bean.LoginParams;
+import com.zenglb.framework.http.result.LoginResult;
+import com.zenglb.framework.http.result.Modules;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Authenticator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -10,28 +22,31 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Http 请求
- *
+ * <p>
  * Created by Anylife.zlb@gmail.com on 2016/7/11.
  */
 public class HttpCall {
     private static final String TAG = HttpCall.class.getSimpleName();
-    private static String baseUrl = "http://test.4009515151.com/";
+//    private static final String baseUrl = "http://test.4009515151.com/";
+    private static final String baseUrl = "https://api.4009515151.com/";
     private static String TOKEN;
     private static ApiService apiService;
 //    private static ProgressResponseBody.ProgressListener progressListener;
 
-
-    /**
-     * set demo token
-     */
-    public static void setToken(String token) {
-        TOKEN = token;
+    public static void cleanToken(){
+        TOKEN="";
     }
 
     public static ApiService getApiService() {
@@ -60,11 +75,15 @@ public class HttpCall {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request originalRequest = chain.request();
+                    if (TextUtils.isEmpty(TOKEN)) {
+                        TOKEN = SharedPreferencesDao.getInstance().getData(SPKey.KEY_ACCESS_TOKEN, "", String.class);
+                    }
+
                     /***
                      * TOKEN == null，Login/Register noNeed Token
                      * noNeedAuth(originalRequest)    refreshToken api request is after log in before log out,but  refreshToken api no need auth
                      */
-                    if (TOKEN == null || alreadyHasAuthorizationHeader(originalRequest) || noNeedAuth(originalRequest)) {
+                    if (TextUtils.isEmpty(TOKEN) || alreadyHasAuthorizationHeader(originalRequest) || noNeedAuth(originalRequest)) {
                         Response originalResponse = chain.proceed(originalRequest);
                         return originalResponse.newBuilder()
                                 //get http request progress,et download app
@@ -112,26 +131,31 @@ public class HttpCall {
      * uese refresh token to Refresh an Access Token
      */
     private static void refreshToken() {
-//		LoginParams loginParams = new LoginParams();
-//		loginParams.setClient_id("5e96eac06151d0ce2dd9554d7ee167ce");
-//		loginParams.setClient_secret("aCE34n89Y277n3829S7PcMN8qANF8Fh");
-//		loginParams.setGrant_type("refresh_token");
-//		loginParams.setRefresh_token(MainActivity.refreshToken);
-//		Call<HttpResponse<LoginResult>> refreshTokenCall = HttpCall.getApiService(null).refreshToken(loginParams);
-//
-//		try {
-//			retrofit2.Response<HttpResponse<LoginResult>> response = refreshTokenCall.execute();
-//			if (response.isSuccessful()) {
-//				int responseCode = response.body().getCode();
-//				if (responseCode == 0) {
-//					HttpResponse<LoginResult> httpResponse = response.body();
-//					HttpCall.setToken("Bearer " + httpResponse.getResult().getAccessToken());
-//					MainActivity.refreshToken = httpResponse.getResult().getRefreshToken();
-//				}
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		LoginParams loginParams = new LoginParams();
+		loginParams.setClient_id("5e96eac06151d0ce2dd9554d7ee167ce");
+		loginParams.setClient_secret("aCE34n89Y277n3829S7PcMN8qANF8Fh");
+		loginParams.setGrant_type("refresh_token");
+		loginParams.setRefresh_token(SharedPreferencesDao.getInstance().getData(SPKey.KEY_REFRESH_TOKEN,"",String.class));
+		Call<HttpResponse<LoginResult>> refreshTokenCall = HttpCall.getApiService().refreshToken(loginParams);
+		try {
+			retrofit2.Response<HttpResponse<LoginResult>> response = refreshTokenCall.execute();
+			if (response.isSuccessful()) {
+				int responseCode = response.body().getCode();
+				if (responseCode == 0) {
+					HttpResponse<LoginResult> httpResponse = response.body();
+                    SharedPreferencesDao.getInstance().saveData(SPKey.KEY_ACCESS_TOKEN, "Bearer " + httpResponse.getResult().getAccessToken());
+                    SharedPreferencesDao.getInstance().saveData(SPKey.KEY_REFRESH_TOKEN, httpResponse.getResult().getRefreshToken());
+				}else{
+//                    //退回到登录页面
+//                    Intent intent = new Intent();
+//                    intent.setAction("com.itheima.intent.open02");
+//                    intent.addCategory("android.intent.category.DEFAULT");
+//                    startActivity(intent);
+                }
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -181,13 +205,34 @@ public class HttpCall {
      *
      */
     public interface ApiService {
-//		/**
-//		 * login/oauth2
-//		 */
-//		@Headers("test: ")
-//		@POST("api/lebang/oauth/access_token")
-//		Call<HttpResponse<LoginResult>> goLogin(@Body LoginParams loginParams);
+        /**
+         * login/oauth2
+         */
+        @Headers("NoNeedAuthFlag: NoNeedAuthFlag")
+        @POST("api/lebang/oauth/access_token")
+        Call<HttpResponse<LoginResult>> goLogin(@Body LoginParams loginParams);
 
+        /**
+         * this request after login/oauth before logout
+         * but no need oauth,so do not add auth header
+         *
+         * @param loginParams
+         */
+        @POST("api/lebang/oauth/access_token")
+        @Headers("NoNeedAuthFlag: NoNeedAuthFlag")
+        Call<HttpResponse<LoginResult>> refreshToken(@Body LoginParams loginParams);
+
+        /**
+         * get Message List();
+         */
+        @GET("api/lebang/messages")
+        Call<HttpResponse<List<Messages>>> getMessages(@Query("max_id") long maxId, @Query("limit") int limit);
+
+        /**
+         * test get something
+         */
+        @GET("api/lebang/staffs/me/modules")
+        Call<HttpResponse<Modules>> getModules();
 
     }
 
