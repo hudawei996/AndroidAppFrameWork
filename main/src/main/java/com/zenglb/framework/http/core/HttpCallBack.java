@@ -106,7 +106,6 @@ public abstract class HttpCallBack<T extends HttpResponse> implements Callback<T
             } catch (IOException ioe) {
                 Log.e("errorBodyStr ioe:", ioe.toString());
             }
-
             try {
                 HttpResponse errorResponse = gson.fromJson(errorBodyStr, HttpResponse.class);
                 if (null != errorResponse) {
@@ -115,7 +114,7 @@ public abstract class HttpCallBack<T extends HttpResponse> implements Callback<T
                     onFailure(-1, "ErrorResponse is null ");  //!!!!!!
                 }
             } catch (Exception jsonException) {
-                onFailure(-1, "http错误请求Json 信息异常"); //
+                onFailure(-1, "http请求错误Json 信息异常"); //
                 jsonException.printStackTrace();
             }
 

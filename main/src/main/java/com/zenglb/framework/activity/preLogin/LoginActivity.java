@@ -19,6 +19,8 @@ import com.zenglb.commonlib.base.BaseActivity;
 import com.zenglb.commonlib.sharedpreferences.SharedPreferencesDao;
 import com.zenglb.framework.R;
 import com.zenglb.framework.activity.demo.DemoActivity;
+import com.zenglb.framework.activity.main.AreUSleepListActivity;
+import com.zenglb.framework.activity.wechat.MainActivityTab;
 import com.zenglb.framework.config.SPKey;
 import com.zenglb.framework.http.bean.LoginParams;
 import com.zenglb.framework.http.core.HttpCall;
@@ -94,13 +96,19 @@ public class LoginActivity extends BaseActivity {
                 SharedPreferencesDao.getInstance().saveData(SPKey.KEY_REFRESH_TOKEN, loginResultHttpResponse.getResult().getRefreshToken());
                 SharedPreferencesDao.getInstance().saveData(SPKey.KEY_LAST_ACCOUNT, etUsername.getText().toString().trim());
 
-                Explode explode = new Explode();
-                explode.setDuration(300);
-                getWindow().setExitTransition(explode);
-                getWindow().setEnterTransition(explode);
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                Intent i2 = new Intent(LoginActivity.this, DemoActivity.class);
-                startActivity(i2, oc2.toBundle());
+                Intent i2 = new Intent(LoginActivity.this, MainActivityTab.class);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    //Android 5.0 以下不能使用啊
+                    Explode explode = new Explode();
+                    explode.setDuration(300);
+                    getWindow().setExitTransition(explode);
+                    getWindow().setEnterTransition(explode);
+                    ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+                    startActivity(i2, oc2.toBundle());
+                }else{
+                    startActivity(i2);
+                }
+
                 LoginActivity.this.finish();
             }
 
@@ -115,10 +123,9 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
-                getWindow().setExitTransition(null);
-                getWindow().setEnterTransition(null);
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getWindow().setExitTransition(null);
+                    getWindow().setEnterTransition(null);
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.getTransitionName());
                     startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
                 } else {

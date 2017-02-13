@@ -6,7 +6,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.zenglb.framework"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -35,6 +35,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':commonlib')
+    compile project(':settingViewLibrary')
 
     //greenDao Core
     compile 'com.android.support:appcompat-v7:25.1.0'
@@ -56,4 +57,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1' //
 
+
+    //https://github.com/hongyangAndroid/android-percent-support-extend
+    compile 'com.zhy:percent-support-extends:1.1.1'
 }

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.zenglb.commonlib.sharedpreferences.SharedPreferencesDao;
+import com.zenglb.framework.activity.main.AreuSleepBean;
 import com.zenglb.framework.config.SPKey;
 import com.zenglb.framework.entity.Messages;
 import com.zenglb.framework.http.bean.LoginParams;
@@ -30,6 +31,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -200,7 +202,6 @@ public class HttpCall {
         return false;
     }
 
-
     /**
      *
      */
@@ -233,6 +234,11 @@ public class HttpCall {
          */
         @GET("api/lebang/staffs/me/modules")
         Call<HttpResponse<Modules>> getModules();
+
+
+        @GET("api/lebang/night_school/{type}")
+        Call<HttpResponse<List<AreuSleepBean>>> getAreuSleep(@Path("type") String type,@Query("page") int page);
+
 
     }
 

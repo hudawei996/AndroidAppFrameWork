@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.wechat.MainActivityTab">
+
+    <include
+        layout="@layout/basic_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <com.zenglb.framework.activity.wechat.TabButtonGroup
+        android:id="@+id/main_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"></com.zenglb.framework.activity.wechat.TabButtonGroup>
+
+    <ImageView
+        android:id="@+id/tabline"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@id/main_footer"
+        android:background="#88111111" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tabline"
+        android:layout_below="@+id/toolbar"></android.support.v4.view.ViewPager>
+
+</RelativeLayout>

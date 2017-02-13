@@ -1,8 +1,6 @@
 package com.zenglb.framework.activity.demo;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.zenglb.commonlib.base.BaseActivity;
 import com.zenglb.framework.R;
 import com.zenglb.framework.entity.Messages;
@@ -20,16 +17,11 @@ import com.zenglb.framework.http.core.HttpCall;
 import com.zenglb.framework.http.core.HttpCallBack;
 import com.zenglb.framework.http.core.HttpResponse;
 import com.zenglb.framework.http.result.Modules;
-
 import java.util.List;
-
 import retrofit2.Call;
-
-import static android.R.id.message;
 
 /**
  * BaseActivity is bigger
- *
  */
 public class DemoActivity extends BaseActivity {
 
@@ -38,8 +30,8 @@ public class DemoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolBarTitle("MainActivity"); //也可以直接在manifest 中设置好
         getToolbar().setOnMenuItemClickListener(onMenuItemClick);
-        getMessages();
-//        requestModules();
+//        getMessages();
+        requestModules();
     }
 
 
@@ -63,13 +55,13 @@ public class DemoActivity extends BaseActivity {
         getMsgsCall.enqueue(new HttpCallBack<HttpResponse<List<Messages>>>(null) {
             @Override
             public void onSuccess(HttpResponse<List<Messages>> listHttpResponse) {
-                ((TextView)findViewById(R.id.message_txt)).setText(listHttpResponse.getResult().toString());
+                ((TextView) findViewById(R.id.message_txt)).setText(listHttpResponse.getResult().toString());
             }
 
             @Override
             public void onFailure(int code, String messageStr) {
                 super.onFailure(code, messageStr);
-                ((TextView)findViewById(R.id.message_txt)).setText(code + "@@checkMobileCall@@" + messageStr);
+                ((TextView) findViewById(R.id.message_txt)).setText(code + "@@checkMobileCall@@" + messageStr);
             }
 
         });
@@ -84,7 +76,7 @@ public class DemoActivity extends BaseActivity {
         getModulesCall.enqueue(new HttpCallBack<HttpResponse<Modules>>(this) {
             @Override
             public void onSuccess(HttpResponse<Modules> getModulesCallResponse) {
-                ((TextView)findViewById(R.id.message_txt)).setText(getModulesCallResponse.getResult().toString());
+                ((TextView) findViewById(R.id.message_txt)).setText(getModulesCallResponse.getResult().toString());
             }
 
             @Override
@@ -93,7 +85,6 @@ public class DemoActivity extends BaseActivity {
             }
         });
     }
-
 
 
     private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
@@ -109,7 +100,7 @@ public class DemoActivity extends BaseActivity {
                     break;
             }
 
-            if(!TextUtils.isEmpty(msg)) {
+            if (!TextUtils.isEmpty(msg)) {
                 Toast.makeText(DemoActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
             return true;

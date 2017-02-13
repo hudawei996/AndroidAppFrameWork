@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidAppFrameWork.iml" filepath="$PROJECT_DIR$/AndroidAppFrameWork.iml" />
       <module fileurl="file://$PROJECT_DIR$/commonlib/commonlib.iml" filepath="$PROJECT_DIR$/commonlib/commonlib.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/settingViewLibrary/settingViewLibrary.iml" filepath="$PROJECT_DIR$/settingViewLibrary/settingViewLibrary.iml" />
     </modules>
   </component>
 </project>

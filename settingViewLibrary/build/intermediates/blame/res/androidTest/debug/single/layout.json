@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\setting_view_check_item_h.xml",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\setting_view_check_item_h.xml"
+    },
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\setting_view_basic_item_v.xml",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\setting_view_basic_item_v.xml"
+    },
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\setting_view_switch_item.xml",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\setting_view_switch_item.xml"
+    },
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\setting_view_image_item.xml",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\setting_view_image_item.xml"
+    },
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\setting_view_basic_item_h.xml",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\setting_view_basic_item_h.xml"
+    },
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\setting_view_check_item_v.xml",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\setting_view_check_item_v.xml"
+    }
+]

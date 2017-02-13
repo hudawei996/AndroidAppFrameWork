@@ -30,6 +30,7 @@
         </activity>
 
         <activity
+            android:launchMode="singleTop"
             android:name=".activity.preLogin.LoginActivity"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
@@ -40,6 +41,13 @@
         <activity
             android:name=".activity.preLogin.RegisterActivity"
             android:theme="@style/Translucent"/>
+
+        <activity
+            android:launchMode="singleTask"
+            android:name=".activity.main.AreUSleepListActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".activity.wechat.MainActivityTab" />
 
     </application>
 

@@ -101,7 +101,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * 版本号小于21的后退按钮图片
      */
     private void showBack() {
-        //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
         getToolbar().setNavigationIcon(R.drawable.ic_back);
         getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,8 +118,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected boolean isShowBacking() {
         return true;
     }
-
-
 
 
     @Override

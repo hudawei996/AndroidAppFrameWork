@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\setting_view_check.png",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\src\\main\\res\\drawable-xhdpi\\setting_view_check.png"
+    },
+    {
+        "merged": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\setting_view_arrow.png",
+        "source": "C:\\Code\\work\\AndroidAppFrameWork\\settingViewLibrary\\src\\main\\res\\drawable-xhdpi\\setting_view_arrow.png"
+    }
+]

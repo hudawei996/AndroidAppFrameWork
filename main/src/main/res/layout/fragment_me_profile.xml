@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_white"
+    tools:context=".activity.wechat.MainActivityTab">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_heightPercent="44%w"
+                app:layout_widthPercent="100%w">
+
+                <ImageView
+                    android:id="@+id/head_img"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:src="@drawable/main_footer_message_selected" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="yourName"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <com.dtr.settingview.lib.SettingView
+                android:id="@+id/ios_style_setting_view_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="11dp"
+                app:iOSStyle="false" />
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:text="退出登录"
+                android:gravity="center"
+                android:onClick="logout"
+                android:textSize="18sp"
+                android:layout_margin="9dp"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_red_dark" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+    </ScrollView>
+
+</FrameLayout>
