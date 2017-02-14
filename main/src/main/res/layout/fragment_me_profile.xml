@@ -52,13 +52,13 @@
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
-                android:text="退出登录"
+                android:layout_margin="9dp"
+                android:background="@android:color/holo_red_dark"
                 android:gravity="center"
                 android:onClick="logout"
-                android:textSize="18sp"
-                android:layout_margin="9dp"
+                android:text="退出登录"
                 android:textColor="@android:color/white"
-                android:background="@android:color/holo_red_dark" />
+                android:textSize="15sp" />
 
         </com.zhy.android.percent.support.PercentLinearLayout>
 

@@ -105,7 +105,7 @@ public class MeProfileFragment extends BaseFragment {
             }
             if (visibleTime == 1) { //这里也不是每次可见的时候都能刷新，只有第一次可见的时候或者数据加载从来没有成功 才调用刷新
                 disposeHttpResult();
-                Toast.makeText(mActivity,"第一次可见",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, "第一次可见", Toast.LENGTH_SHORT).show();
 
 //                new Handler().postDelayed(new Runnable() {  //是Spring View的Bug！
 //                    @Override
@@ -140,7 +140,7 @@ public class MeProfileFragment extends BaseFragment {
      */
     protected void initViews(View rootView) {
 
-        logout=(TextView) rootView.findViewById(R.id.logout);
+        logout = (TextView) rootView.findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,7 +208,6 @@ public class MeProfileFragment extends BaseFragment {
         mListData.add(mItemViewData);
 
 
-
         mItemViewData = new SettingViewItemData();
         mItemData = new SettingData();
         mItemData.setTitle("飞行模式2");
@@ -217,14 +216,12 @@ public class MeProfileFragment extends BaseFragment {
         mListData.add(mItemViewData);
 
 
-
         mItemViewData = new SettingViewItemData();
         mItemData = new SettingData();
         mItemData.setTitle("飞行模式3");
         mItemViewData.setData(mItemData);
         mItemViewData.setItemView(new SwitchItemView(mActivity));
         mListData.add(mItemViewData);
-
 
 
         mItemViewData = new SettingViewItemData();
@@ -260,7 +257,7 @@ public class MeProfileFragment extends BaseFragment {
     /**
      *
      */
-    public void logout(){
+    public void logout() {
         Intent intent = new Intent();
         intent.setClass(mActivity, LoginActivity.class);
         mActivity.startActivity(intent);

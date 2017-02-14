@@ -25,7 +25,6 @@ import okhttp3.Route;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -121,7 +120,6 @@ public class HttpCall {
                     .baseUrl(baseUrl)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())    //RXjava
                     .build();
             apiService = client.create(ApiService.class);
         }

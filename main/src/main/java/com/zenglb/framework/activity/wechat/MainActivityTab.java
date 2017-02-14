@@ -34,7 +34,6 @@ public class MainActivityTab extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     protected int setLayoutId() {
         return R.layout.activity_main_tab;
@@ -89,22 +88,18 @@ public class MainActivityTab extends BaseActivity {
 
     public class MyAdapter extends FragmentPagerAdapter {
         ArrayList<Fragment> list;
-
         public MyAdapter(FragmentManager fm, ArrayList<Fragment> list) {
             super(fm);
             this.list = list;
         }
-
         @Override
         public Fragment getItem(int arg0) {
             return list.get(arg0);
         }
-
         @Override
         public int getCount() {
             return list.size();
         }
-
     }
 
     @Override

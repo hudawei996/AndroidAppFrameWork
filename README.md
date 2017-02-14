@@ -1,15 +1,16 @@
 # 这里是草稿区域
 
+##
 有一个很重要的问题，MyLibrary工程有它自己的依赖。例如，MyApplication和MyLibrary使用support libraries，这有可能会发生冲突。
-
 我们可以在gradle中通过transitive配置依赖避免这个问题。
 我们可以修改这行
-
 compile project(':my-library')
 为
 compile(project(':my-library')){
     transitive=false;
 }
+
+
 
 
 #这里是答疑区域
