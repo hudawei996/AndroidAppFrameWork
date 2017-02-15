@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<files-path>标签共享的是在应用的内部存储中“files/”目录下的目录。-->
+    <!--“path”属性字段指出了该子目录为“files/”目录下的子目录“images/”。-->
+    <!--“name”属性字段告知FileProvider向在“files/images/”子目录中的文件的Content URI添加路径分段（path segment）标记：“myimages”。-->
+    <!--比如上面的<files-path>标签表示共享/data/data/package（包名）/files/images文件夹中的文件或图片-->
+
+    <paths>
+        <external-path name="share_path" path="lebangs" />
+        <files-path name="files" path="."/>
+    </paths>
+</paths>

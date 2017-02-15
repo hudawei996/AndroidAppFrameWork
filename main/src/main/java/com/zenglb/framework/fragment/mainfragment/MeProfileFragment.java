@@ -23,6 +23,8 @@ import com.liaoinstan.springview.widget.SpringView;
 import com.zenglb.commonlib.base.BaseFragment;
 import com.zenglb.framework.R;
 import com.zenglb.framework.activity.preLogin.LoginActivity;
+import com.zenglb.framework.activity.preLogin.RegisterActivity;
+import com.zenglb.framework.activity.setHeadImg.SetHeadImgActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,11 +157,14 @@ public class MeProfileFragment extends BaseFragment {
             @Override
             public void onItemClick(int index) {
                 // TODO Auto-generated method stub
+                startActivity(new Intent(mActivity, SetHeadImgActivity.class));
+
                 Toast.makeText(mActivity, "第" + index + "项被点击", Toast.LENGTH_SHORT).show();
                 if (index == 4) {
                     mSettingView1.modifySubTitle("中国联通", index);
                 } else if (index == 2) {
                     mSettingView1.modifySubTitle("关闭", index);
+
                 }
             }
         });

@@ -16,8 +16,7 @@
 #   public *;
 #}
 
-# copyright zhonghanwen
-#-------------------------------------------基本不用动区域--------------------------------------------
+#-------------------------------------------1.基本不用动区域--------------------------------------------
 #---------------------------------基本指令区----------------------------------
 -optimizationpasses 5
 -dontskipnonpubliclibraryclassmembers
@@ -91,8 +90,6 @@
   public static final android.os.Parcelable$Creator *;
 }
 
-#----------------------------------------------------------------------------
-
 #---------------------------------webview------------------------------------
 -keepclassmembers class fqcn.of.javascript.interface.for.Webview {
    public *;
@@ -108,6 +105,7 @@
 -keep class com.zenglb.framework.http.bean.** { *; }
 -keep class com.zenglb.framework.entity.** { *; }
 -keep class com.zenglb.framework.http.result.** { *; }
+
 
 #---------------------------------第三方包-------------------------------
 
@@ -151,7 +149,6 @@
 -dontwarn com.umeng.**
 -dontwarn com.tencent.weibo.sdk.**
 -dontwarn com.facebook.**
-
 
 -keep enum com.facebook.**
 -keepattributes Exceptions,InnerClasses,Signature
@@ -252,7 +249,6 @@ public static java.lang.String TABLENAME;
 
 
 #---------------------------------与js互相调用的类------------------------
-
 
 
 #---------------------------------自定义View的类------------------------
