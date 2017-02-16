@@ -34,6 +34,11 @@ android {
 
 #简单的模板
   我建议gradle 中配置proguard-android-optimize.txt。风险？风险无处不在呀，来吧
+  使用 proguard-android-optimize 后要添加以下配置，否知http请求的方法内部无法传参
+  -keepclasseswithmembers class * {
+      @retrofit2.http.* <methods>;
+  }
+  
 
 
 #proguard-android-optimize.txt 与 proguard-android.txt的区别

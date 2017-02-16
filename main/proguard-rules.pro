@@ -1,21 +1,21 @@
 
-## -------------------------下面是proguard-android-optimize.txt已经有的配置----------------------------------------
-## 指定混淆是采用的算法，后面的参数是一个过滤器
-## 这个过滤器是谷歌推荐的算法，一般不做更改
-#-optimizations !code/simplification/cast,!field/*,!class/merging/*
-## 代码混淆压缩比，在0-7之间，默认为5，一般不做修改
-#-optimizationpasses 5
-## 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。
-#-dontpreverify
-#
-## 混合时不使用大小写混合，混合后的类名为小写
-#-dontusemixedcaseclassnames
-## 指定不去忽略非公共库的类
-#-dontskipnonpubliclibraryclasses
-## 这句话能够使我们的项目混淆后产生映射文件
-## 包含有类名->混淆后类名的映射关系
-#-verbose
-## -------------------------上面是proguard-android-optimize.txt已经有的配置----------------------------------------
+# -------------------------下面是proguard-android-optimize.txt已经有的配置----------------------------------------
+# 指定混淆是采用的算法，后面的参数是一个过滤器
+# 这个过滤器是谷歌推荐的算法，一般不做更改
+-optimizations !code/simplification/cast,!field/*,!class/merging/*
+# 代码混淆压缩比，在0-7之间，默认为5，一般不做修改
+-optimizationpasses 5
+# 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。
+-dontpreverify
+
+# 混合时不使用大小写混合，混合后的类名为小写
+-dontusemixedcaseclassnames
+# 指定不去忽略非公共库的类
+-dontskipnonpubliclibraryclasses
+# 这句话能够使我们的项目混淆后产生映射文件
+# 包含有类名->混淆后类名的映射关系
+-verbose
+# -------------------------上面是proguard-android-optimize.txt已经有的配置----------------------------------------
 
 
 
@@ -27,7 +27,8 @@
 
 # 避免混淆泛型
 -keepattributes Signature
-
+# 避免混淆异常
+-keepattributes Exceptions
 # 抛出异常时保留代码行号
 -keepattributes SourceFile,LineNumberTable
 
@@ -63,6 +64,9 @@
 #    public *** get*();
 #    public *** is*();
 #}
+# 使用Gson时需要配置Gson的解析对象及变量都不混淆。不然Gson会找不到变量。
+# 将下面替换成自己的实体类
+
 -keep class com.zenglb.framework.entity.** { *; }
 -keep class com.zenglb.framework.config.** { *; }
 -keep class com.zenglb.framework.http.bean.** { *; }
@@ -187,24 +191,38 @@ public static java.lang.String TABLENAME;
 -keep class com.google.gson.examples.android.model.** { *; }
 
 
-# 使用Gson时需要配置Gson的解析对象及变量都不混淆。不然Gson会找不到变量。
-# 将下面替换成自己的实体类
--keep class com.example.bean.** { *; }
-
-## okhttp
--dontwarn com.squareup.okhttp.**
--keep class com.squareup.okhttp.{*;}
-
-# OkHttp3
--dontwarn com.squareup.okhttp3.**
--keep class com.squareup.okhttp3.** { *;}
+#okio
 -dontwarn okio.**
+-keep class okio.** { *; }
+-keep interface okio.** { *; }
+
+#okhttp3
+-dontwarn okhttp3.**
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+
 
 # Retrofit
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
--keepattributes Signature
--keepattributes Exceptions
+-keepattributes Signature -keepattributes Exceptions
+
+# 使用 proguard-android-optimize 后要添加，虽然工作很好了，还没有明白为什么？？
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
+-keepclasseswithmembers interface * {
+    @retrofit2.* <methods>;
+}
+
+# Platform calls Class.forName on types which do not exist on Android to determine platform.
+-dontnote retrofit2.Platform
+# Platform used when running on RoboVM on iOS. Will not be used at runtime.
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+# Platform used when running on Java 8 VMs. Will not be used at runtime.
+-dontwarn retrofit2.Platform$Java8
+
 
 
 # RxJava RxAndroid

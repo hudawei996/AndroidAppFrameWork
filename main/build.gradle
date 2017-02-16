@@ -38,10 +38,6 @@ android {
         }
 
         debug {
-//            minifyEnabled false
-//            zipAlignEnabled false
-//            shrinkResources false
-
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
