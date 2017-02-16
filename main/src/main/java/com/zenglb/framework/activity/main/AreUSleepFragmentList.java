@@ -1,7 +1,6 @@
 package com.zenglb.framework.activity.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -15,10 +14,10 @@ import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.zenglb.framework.R;
-import com.zenglb.framework.entity.Messages;
 import com.zenglb.framework.http.core.HttpCall;
 import com.zenglb.framework.http.core.HttpCallBack;
 import com.zenglb.framework.http.core.HttpResponse;
+import com.zenglb.framework.http.result.AreuSleepResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class AreUSleepFragmentList extends Fragment {
     private SpringView springView;
     private RecyclerView mRecyclerView = null;
     private AreUSleepListAdapter areUSleepListAdapter;
-    private List<AreuSleepBean> data = new ArrayList<>();
+    private List<AreuSleepResult> data = new ArrayList<>();
 
     public AreUSleepFragmentList() {
         // Required empty public constructor
@@ -131,10 +130,10 @@ public class AreUSleepFragmentList extends Fragment {
      *
      */
     private void getHttpData(String mParam1, int page) {
-        Call<HttpResponse<List<AreuSleepBean>>> getAreuSleepCall = HttpCall.getApiService().getAreuSleep(mParam1, page);
-        getAreuSleepCall.enqueue(new HttpCallBack<HttpResponse<List<AreuSleepBean>>>(getActivity(),false) {
+        Call<HttpResponse<List<AreuSleepResult>>> getAreuSleepCall = HttpCall.getApiService().getAreuSleep(mParam1, page);
+        getAreuSleepCall.enqueue(new HttpCallBack<HttpResponse<List<AreuSleepResult>>>(getActivity(),false) {
             @Override
-            public void onSuccess(HttpResponse<List<AreuSleepBean>> listHttpResponse) {
+            public void onSuccess(HttpResponse<List<AreuSleepResult>> listHttpResponse) {
                 Log.e("dfd",listHttpResponse.getResult().toString());
                 disposeHttpResult(listHttpResponse.getResult());
             }
@@ -154,7 +153,7 @@ public class AreUSleepFragmentList extends Fragment {
      *
      * @return
      */
-    private void disposeHttpResult(List<AreuSleepBean> areuSleepBeanLista) {
+    private void disposeHttpResult(List<AreuSleepResult> areuSleepBeanLista) {
         springView.onFinishFreshAndLoad();
         if (areuSleepBeanLista != null) {
             if (page <= 1) data.clear();
@@ -162,10 +161,10 @@ public class AreUSleepFragmentList extends Fragment {
             if (areuSleepBeanLista != null && areuSleepBeanLista.size() != 0) {
                 data.addAll(areuSleepBeanLista);
                 page++;
+                areUSleepListAdapter.notifyDataSetChanged();
             } else {
 //				ToastUtil.toast(getActivity(), "暂无数据，请稍后再试！", Toast.LENGTH_SHORT);
             }
-            areUSleepListAdapter.notifyDataSetChanged();
         }
 
         if (data == null || data.size() == 0) {

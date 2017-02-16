@@ -28,23 +28,22 @@ android {
 
     buildTypes {
         release {
-            // 混淆      shrinkResources依赖于minifyEnabled，必须和minifyEnabled一起用。
-            minifyEnabled true
-            // Zipalign优化
-            zipAlignEnabled true
-            // 移除无用的resource文件
-            shrinkResources true
+            minifyEnabled true    //
+            zipAlignEnabled true  // Zipalign优化
+            shrinkResources true  // 移除无用的resource文件,必须和minifyEnabled 一起使用
 
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            debuggable true
+            debuggable false
             signingConfig signingConfigs.MyConfig
         }
+
         debug {
-            // 混淆   shrinkResources依赖于minifyEnabled，必须和minifyEnabled一起用。
+//            minifyEnabled false
+//            zipAlignEnabled false
+//            shrinkResources false
+
             minifyEnabled true
-            // Zipalign优化
             zipAlignEnabled true
-            // 移除无用的resource文件
             shrinkResources true
 
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

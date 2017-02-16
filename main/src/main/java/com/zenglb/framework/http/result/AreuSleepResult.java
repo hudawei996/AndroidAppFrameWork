@@ -1,9 +1,9 @@
-package com.zenglb.framework.activity.main;
+package com.zenglb.framework.http.result;
 
 /**
  * Created by zenglb on 2017/2/9.
  */
-public class AreuSleepBean {
+public class AreuSleepResult {
     private String topic;
     private String start_time;
     private String id;

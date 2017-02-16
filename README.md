@@ -42,3 +42,16 @@ compile(project(':my-library')){
   - 视图绑定和监听 butterknife/databing
   - rxjava,rxAndroid
   -
+
+
+
+# 项目中包含的基本的通用模块
+- 混淆压缩打包优化 Proguard　proguard-android-optimize　和 proguard-android 区别 ？
+  https://github.com/D-clock/Doc/blob/master/Android/Gradle/4_AndroidStudio%E4%B8%8BProGuard%E6%B7%B7%E6%B7%86%E6%89%93%E5%8C%85.md
+- 权限管理
+- Toolbar 的处理
+- Fragment 的懒加载
+- 通用的BaseActivity 和BaseFragment的封装
+- 通用的Lib module 的封装
+- Http 的闭环处理
+-

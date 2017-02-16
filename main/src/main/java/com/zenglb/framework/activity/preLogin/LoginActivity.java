@@ -45,6 +45,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferencesDao.getInstance().saveData(SPKey.KEY_ACCESS_TOKEN, "");
+
     }
 
     @Override
@@ -63,6 +65,8 @@ public class LoginActivity extends BaseActivity {
         btGo.setOnClickListener(this);
 
         etUsername.setText(SharedPreferencesDao.getInstance().getData(SPKey.KEY_LAST_ACCOUNT, "", String.class));
+
+        etUsername.setText("18826562075");
         etPassword.setText("zxcv1234");
     }
 
@@ -77,7 +81,6 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(this, "请完整输入用户名和密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        SharedPreferencesDao.getInstance().saveData(SPKey.KEY_ACCESS_TOKEN, "");
         HttpCall.cleanToken();
 
         LoginParams loginParams = new LoginParams();

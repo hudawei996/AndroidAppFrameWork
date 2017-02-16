@@ -1,11 +1,10 @@
 package com.zenglb.framework.http.core;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.zenglb.commonlib.sharedpreferences.SharedPreferencesDao;
-import com.zenglb.framework.activity.main.AreuSleepBean;
+import com.zenglb.framework.http.result.AreuSleepResult;
 import com.zenglb.framework.config.SPKey;
 import com.zenglb.framework.entity.Messages;
 import com.zenglb.framework.http.bean.LoginParams;
@@ -235,7 +234,7 @@ public class HttpCall {
 
 
         @GET("api/lebang/night_school/{type}")
-        Call<HttpResponse<List<AreuSleepBean>>> getAreuSleep(@Path("type") String type,@Query("page") int page);
+        Call<HttpResponse<List<AreuSleepResult>>> getAreuSleep(@Path("type") String type, @Query("page") int page);
 
 
     }
